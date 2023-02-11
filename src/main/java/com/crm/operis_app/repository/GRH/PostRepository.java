@@ -1,0 +1,16 @@
+package com.crm.operis_app.repository.GRH;
+
+import com.crm.operis_app.model.GRH.Post;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
+
+@Repository
+
+public interface PostRepository extends JpaRepository<Post, Long> {
+    List<Post> findByActiveIsTrueOrderByIdAsc();
+
+    List<Post> findByActiveIsFalseOrderByIdAsc();
+
+}

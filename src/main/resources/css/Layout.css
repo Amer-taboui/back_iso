@@ -1,0 +1,189 @@
+/*! Invoice Templates @author: Invoicebus @email: info@auditbus.com @web: https://auditbus.com @version: 1.0.0 @updated: 2015-03-09 09:03:07 @license: Invoicebus */
+        /* Reset styles */
+        @import url("https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,700&subset=cyrillic,cyrillic-ext,latin,greek-ext,greek,latin-ext,vietnamese");
+
+        html, body, div, span, applet, object, iframe,
+        h1, h2, span, h4, h5, h6, p, blockquote, pre,
+        a, abbr, acronym, address, big, cite, code,
+        del, dfn, em, img, ins, kbd, q, s, samp,
+        small, strike, strong, sub, sup, tt, var,
+        b, u, i, center,
+        dl, dt, dd, ol, ul, li,
+        fieldset, form, label, legend,
+        table, caption, tbody, tfoot, thead, tr, th, td,
+        article, aside, canvas, details, embed,
+        figure, figcaption, footer, header, hgroup,
+        menu, nav, output, ruby, section, summary,
+        time, mark, audio, video {
+            margin: 0;
+            padding: 0;
+            border: 0;
+            font: inherit;
+            font-size: 100%;
+            vertical-align: baseline;
+        }
+
+        html {
+            line-height: 1;
+        }
+
+        ol, ul {
+            list-style: none;
+        }
+
+        table {
+            border-collapse: collapse;
+            border-spacing: 0;
+        }
+
+        caption, th, td {
+            text-align: left;
+            font-weight: normal;
+            vertical-align: middle;
+        }
+
+        q, blockquote {
+            quotes: none;
+        }
+
+        q:before, q:after, blockquote:before, blockquote:after {
+            content: "";
+            content: none;
+        }
+
+        a img {
+            border: none;
+        }
+
+        article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section, summary {
+            display: block;
+        }
+
+        /* Invoice styles */
+        /**
+         * DON'T override any styles for the <html> and <body> tags, as this may break the layout.
+         * Instead wrap everything in one main <div id="container"> element where you may change
+         * something like the font or the background of the audit
+         */
+        html, body {
+            /* MOVE ALONG, NOTHING TO CHANGE HERE! */
+        }
+
+        /**
+         * IMPORTANT NOTICE: DON'T USE '!important' otherwise this may lead to broken print layout.
+         * Some browsers may require '!important' in oder to work properly but be careful with it.
+         */
+        .clearfix {
+            display: block;
+            clear: both;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        b, strong, .bold {
+            font-weight: bold;
+        }
+
+        #container {
+            font: normal 13px/1.4em 'Open Sans', Sans-serif;
+            margin: 0 auto;
+            padding: 15px 7px;
+            min-height: 1058px;
+        }
+
+        #memo .report-title {
+            background: #415c7d 560px center no-repeat;
+            background-size: 100px auto;
+            padding: 10px 20px;
+            position: relative;
+            text-align: center;
+            margin-bottom: 15px;
+            border-radius: 18px;
+
+        }
+
+    #memo .report-title span {
+            color: white;
+            display: inline-block;
+            min-width: 20px;
+            font-size: 36px;
+            font-weight: bold;
+            line-height: 1em;
+        }
+   #memo:after {
+            content: '';
+            display: block;
+            clear: both;
+        }
+
+        #audit-info {
+            float: left;
+            margin: 25px 0 0 20px;
+        }
+
+        #audit-info > div {
+            float: left;
+        }
+
+        #audit-info > div > span {
+            display: block;
+            min-width: 20px;
+            min-height: 18px;
+            margin-bottom: 16px;
+        }
+
+        #audit-info > div:last-child {
+            margin-left: 20px;
+        }
+
+        #audit-info:after {
+            content: '';
+            display: block;
+            clear: both;
+        }
+
+
+        #audit-info-2 {
+            float: right;
+            margin: 25px 25px 0 20px;
+        }
+
+        #audit-info-2 > div {
+            float: left;
+        }
+
+        #audit-info-2 > div > span {
+            display: block;
+            min-width: 20px;
+            min-height: 18px;
+            margin-bottom: 16px;
+        }
+
+        #audit-info-2 > div:last-child {
+            margin-left: 20px;
+        }
+
+        #audit-info-2:after {
+            content: '';
+            display: block;
+            clear: both;
+        }
+
+            .title {
+            font-size: 22px;
+            font-weight: 900;
+              color: #1d53f5;
+                 }
+
+           .sub-title {
+            font-size: 16px;
+            font-weight: 700;
+                 }
+
+         @media print {
+@page {
+margin: 0.5cm;
+}                }
+
