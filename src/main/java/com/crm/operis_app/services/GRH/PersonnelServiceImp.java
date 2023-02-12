@@ -4,11 +4,13 @@ import com.crm.operis_app.exception.ResourceNotFoundException;
 import com.crm.operis_app.model.GRH.Formation;
 import com.crm.operis_app.model.GRH.Personal;
 import com.crm.operis_app.model.GRH.Post;
+import com.crm.operis_app.model.audit.ListeAudit;
 import com.crm.operis_app.model.authUser.User;
 
 import com.crm.operis_app.repository.GRH.FormationRepository;
 import com.crm.operis_app.repository.GRH.PostRepository;
 import com.crm.operis_app.repository.Utils.PersonnelRepository;
+import com.crm.operis_app.repository.audit.ListeAuditRepository;
 import com.crm.operis_app.repository.authUser.UserRepository;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,9 +34,12 @@ public class PersonnelServiceImp implements PersonnelService {
     PostRepository postRepository;
     @Autowired
     FormationRepository formationRepository;
+    @Autowired
+    ListeAuditRepository listeAuditRepository;
+
     Long formationId;
     Long personnelId;
-
+    Long auditId;
     @Override
     public List<Personal> getListPersonnels() {
         return personnelRepository.findByActiveIsTrueOrderByIdAsc();
@@ -181,6 +186,31 @@ public void addParticipantToFormation(Long formationId, Long personnelId) {
         Formation formation = formationById.get();
         formation.getPersonnels().remove(personal);
         formationRepository.save(formation);
+    }
+    //----------------------addPersonnalToFormation------------------//
+    @Override
+    public void addPersonalAudit(Long auditId, Long personalId) {
+        ListeAudit formation = listeAuditRepository.findById(auditId).orElseThrow(() -> new ResourceNotFoundException("formation not found"));
+        Personal personal = personnelRepository.findById(personalId).orElseThrow(() -> new ResourceNotFoundException("Personal not found"));
+        formation.getPersonnels().add(personal);
+        listeAuditRepository.save(formation);
+    }
+
+    @Override
+    public void removePersonalAudit(Long personalId, Long auditId) {
+        Optional<Personal> personalById = personnelRepository.findById(personalId);
+        if (!personalById.isPresent()) {
+            throw new ResourceNotFoundException("personal with id " + personalId + " does not exist");
+        }
+        Personal personal = personalById.get();
+
+        Optional<ListeAudit> formationById = listeAuditRepository.findById(auditId);
+        if (!formationById.isPresent()) {
+            throw new ResourceNotFoundException("formation  with id " + auditId + " does not exist");
+        }
+        ListeAudit formation = formationById.get();
+        formation.getPersonnels().remove(personal);
+        listeAuditRepository.save(formation);
     }
 
     @Override

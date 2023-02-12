@@ -50,13 +50,14 @@ public class EtatActionService {
 
     public EtatAction updateEtatActionById(Long action1Id, EtatAction etatAction) {
         if (! etatActionRepository.existsById(action1Id)) {
-            throw new ResourceNotFoundException("ValidationAction  with id " + action1Id + " not found");
+            throw new ResourceNotFoundException("etat  with id " + action1Id + " not found");
         }
         Optional<EtatAction> Liste =  etatActionRepository.findById(action1Id);
         if (!Liste.isPresent()) {
-            throw new ResourceNotFoundException("ValidationAction with id " + action1Id + " not found");
+            throw new ResourceNotFoundException("etat with id " + action1Id + " not found");
         }
         EtatAction liste1 = Liste.get();
+        liste1.setResponsableCloture(etatAction.getResponsableCloture());
         liste1.setCloture(etatAction.isCloture());
         liste1.setDateCloture(etatAction.getDateCloture());
         return  etatActionRepository.save(liste1);
@@ -64,7 +65,7 @@ public class EtatActionService {
 
     public ResponseEntity<Object> deleteEtatActionById(long action1Id) {
         if (! etatActionRepository.existsById(action1Id)) {
-            throw new ResourceNotFoundException("validationAction with id " + action1Id + " not found");
+            throw new ResourceNotFoundException("etat with id " + action1Id + " not found");
         }
         etatActionRepository.deleteById(action1Id);
         return ResponseEntity.ok().build();

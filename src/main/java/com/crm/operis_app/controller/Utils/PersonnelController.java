@@ -93,7 +93,15 @@ public void addPersonalToFormation(@PathVariable Long formationId, @PathVariable
     public void removePersonalFormation(@PathVariable(value = "personalId") Long personalId, @PathVariable(value = "formationId") Long formationId) {
         personnelServiceImp.removePersonalFormation(personalId, formationId);
     }
-
+    //--------------------------------personal-audit----------------------//
+    @PostMapping("add/audit/{auditId}/personals/{personalId}")
+    public void addPersonalToAudit(@PathVariable Long auditId, @PathVariable Long personalId) {
+        personnelServiceImp.addPersonalAudit(auditId, personalId);
+    }
+    @PostMapping(value = "remove/personal/{personalId}/audit/{auditId}")
+    public void removePersonalAudit(@PathVariable(value = "personalId") Long personalId, @PathVariable(value = "auditId") Long auditId) {
+        personnelServiceImp.removePersonalAudit(personalId, auditId);
+    }
 
 
     @GetMapping("/skill")

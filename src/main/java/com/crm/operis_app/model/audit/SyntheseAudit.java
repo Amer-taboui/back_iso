@@ -18,11 +18,11 @@ public class SyntheseAudit {
     @Column(name = "COMMENTAIRE")
     private String commentaire;
     @Column(name = "FORCES")
-    private String Forces;
+    private String forces;
     @Column(name = "FAIBLESSES")
-    private String Faiblesses;
+    private String faiblesses;
     @Column(name = "OBSERVATION")
-    private String Observations;
+    private String observations;
 
     //-----------------ListeAudit-------------------------//
 
@@ -49,28 +49,29 @@ public class SyntheseAudit {
     }
 
     public String getForces() {
-        return Forces;
+        return forces;
     }
 
     public void setForces(String forces) {
-        Forces = forces;
+        this.forces = forces;
     }
 
     public String getFaiblesses() {
-        return Faiblesses;
+        return faiblesses;
     }
 
     public void setFaiblesses(String faiblesses) {
-        Faiblesses = faiblesses;
+        this.faiblesses = faiblesses;
     }
 
     public String getObservations() {
-        return Observations;
+        return observations;
     }
 
     public void setObservations(String observations) {
-        Observations = observations;
+        this.observations = observations;
     }
+
     @JsonIgnore
     public ListeAudit getListeAudit() {
         return listeAudit;

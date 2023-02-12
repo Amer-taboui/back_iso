@@ -1,5 +1,6 @@
 package com.crm.operis_app.model.audit;
 
+import com.crm.operis_app.model.GRH.Personal;
 import com.crm.operis_app.model.action.actionCorrection.ValidationAction;
 import com.crm.operis_app.model.files.FileModel;
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -50,6 +51,18 @@ public class ListeAudit {
     @OrderBy("id ASC")
     @OneToMany(mappedBy = "listeAudit", cascade = CascadeType.ALL, fetch = FetchType.LAZY )
     private Set<ConstatAudit> constatAudit;
+    //------------------------Synthese-Audit------------------------------//
+    @OrderBy("id ASC")
+    @OneToMany(mappedBy = "listeAudit", cascade = CascadeType.ALL, fetch = FetchType.LAZY )
+    private Set<SyntheseAudit> syntheseAudit;
+    //----------------------personnel----------------------------//
+
+    @OrderBy("id ASC")
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "PERSONNEL_AUDITEUR", joinColumns = { @JoinColumn(name = "AUDIT_ID") }, inverseJoinColumns = {
+            @JoinColumn(name = "PERSONAL_ID") })
+    private Set<Personal> personnels;
+
     //-------------file-------------------------------//
     @ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
     @JoinTable(name = "Audit_FILE", joinColumns = { @JoinColumn(name = "LIST_AUDIT_ID") }, inverseJoinColumns = {

@@ -20,5 +20,8 @@ public interface PersonnelService {
     void removePersonalPost(Long personalId, Long postId);
     void addPersonalFormation(Long formationId, Long personalId);
     void removePersonalFormation(Long personalId, Long formationId);
-    public List<Map<String,Object>>getPersonals();
+    List<Map<String,Object>>getPersonals();
+    void addPersonalAudit(Long auditId, Long personalId);
+    void removePersonalAudit(Long personalId, Long auditId);
+
 }
