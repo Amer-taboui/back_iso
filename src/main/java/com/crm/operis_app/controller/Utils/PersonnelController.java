@@ -80,10 +80,12 @@ public void addParticipantToFormation(@PathVariable(value = "formationId") Long 
     public void addPersonalToPost(@PathVariable Long postId, @PathVariable Long personalId) {
         personnelServiceImp.addPersonalPost(postId, personalId);
     }
+
     @PostMapping(value = "remove/personal/{personalId}/post/{postId}")
     public void removePersonalPost(@PathVariable(value = "personalId") Long personalId, @PathVariable(value = "postId") Long postId) {
         personnelServiceImp.removePersonalPost(personalId, postId);
     }
+
 //--------------------------------personal-formation----------------------//
 @PostMapping("add/formation/{formationId}/personals/{personalId}")
 public void addPersonalToFormation(@PathVariable Long formationId, @PathVariable Long personalId) {

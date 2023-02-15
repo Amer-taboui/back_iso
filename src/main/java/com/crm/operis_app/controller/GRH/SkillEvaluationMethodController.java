@@ -71,11 +71,15 @@ public class SkillEvaluationMethodController {
         return skillEvaluationMethodServiceImp.updateSkillEvaluationMethodById(skillEvaluationMethodId, post);
     }
 
-    @RequestMapping(value = "/posteListe/{skillEvaluationMethodId}/{isDelete}", method = RequestMethod.DELETE)
-    public ResponseEntity<Object> deleteSkillEvaluationMethodById(@PathVariable(value = "skillEvaluationMethodId") Long skillEvaluationMethodId, @PathVariable(value = "isDelete") Boolean isDelete) {
-        return skillEvaluationMethodServiceImp.deleteSkillEvaluationMethodById(skillEvaluationMethodId, isDelete);
-    }
+//    @RequestMapping(value = "/posteListe/{skillEvaluationMethodId}/{isDelete}", method = RequestMethod.DELETE)
+//    public ResponseEntity<Object> deleteSkillEvaluationMethodById(@PathVariable(value = "skillEvaluationMethodId") Long skillEvaluationMethodId, @PathVariable(value = "isDelete") Boolean isDelete) {
+//        return skillEvaluationMethodServiceImp.deleteSkillEvaluationMethodById(skillEvaluationMethodId, isDelete);
+//    }
 
+    @DeleteMapping(value = "delete/skillEvaluationMethod/{skillEvaluationMethodId}")
+    public ResponseEntity<Object> deleteTeamById(@PathVariable(value = "skillEvaluationMethodId") long skillEvaluationMethodId) {
+        return skillEvaluationMethodServiceImp.deleteSkillEvaluationMethodById(skillEvaluationMethodId);
+    }
     @GetMapping("/evaluation/{personalId}/{postId}/sum")
     public ResponseEntity<Double> calculateSumNoteByPersonalIdAndNomPersonnelAndPostId(@PathVariable Long personalId, @PathVariable Long postId) {
         double sum = skillEvaluationMethodServiceImp.calculateSumNoteByPersonalIdAndNomPersonnelAndPostId(personalId, postId);

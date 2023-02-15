@@ -114,22 +114,35 @@ public List<BigInteger> getSkillIdBySkillEvaluation(Long postId) {
             throw new ResourceNotFoundException("skillEvaluationMethod with id " + skillEvaluationMethodId + " not found");
         }
         SkillEvaluationMethod post1 = posteListe.get();
-    //    post1.setDesciption(postRequest.getDesciption());
+
+        post1.setNote(postRequest.getNote());
+        post1.setLevel(postRequest.getLevel());
+        post1.setComment(postRequest.getComment());
+
 
         return skillEvaluationMethodRepository.save(post1);
     }
     @Override
-    public ResponseEntity<Object> deleteSkillEvaluationMethodById(Long skillEvaluationMethodId, Boolean isDelete) {
-        Optional<SkillEvaluationMethod> SkillEvaluationMethod = skillEvaluationMethodRepository.findById(skillEvaluationMethodId);
-        if (!SkillEvaluationMethod.isPresent()) {
-            throw new ResourceNotFoundException("skillEvaluationMethod with id " + skillEvaluationMethodId + " not found");
+//    public ResponseEntity<Object> deleteSkillEvaluationMethodById(Long skillEvaluationMethodId, Boolean isDelete) {
+//        Optional<SkillEvaluationMethod> SkillEvaluationMethod = skillEvaluationMethodRepository.findById(skillEvaluationMethodId);
+//        if (!SkillEvaluationMethod.isPresent()) {
+//            throw new ResourceNotFoundException("skillEvaluationMethod with id " + skillEvaluationMethodId + " not found");
+//        }
+//        SkillEvaluationMethod post1 = SkillEvaluationMethod.get();
+//
+//        skillEvaluationMethodRepository.save(post1);
+//        return ResponseEntity.ok().build();
+//    }
+    public ResponseEntity<Object> deleteSkillEvaluationMethodById(long skillEvaluationMethodId) {
+        if (! skillEvaluationMethodRepository.existsById(skillEvaluationMethodId)) {
+            throw new org.springframework.data.rest.webmvc.ResourceNotFoundException("skillEvaluationMethod with id " + skillEvaluationMethodId + " not found");
         }
-        SkillEvaluationMethod post1 = SkillEvaluationMethod.get();
 
-        skillEvaluationMethodRepository.save(post1);
+        skillEvaluationMethodRepository.deleteById(skillEvaluationMethodId);
+
         return ResponseEntity.ok().build();
-    }
 
+    }
     public double calculateSumNoteByPersonalIdAndNomPersonnelAndPostId(Long personalId, Long postId) {
         return skillEvaluationMethodRepository.sumNoteByPersonalIdAndNomPersonnelAndPostId(personalId, postId);
     }

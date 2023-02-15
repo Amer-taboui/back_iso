@@ -12,5 +12,5 @@ public interface SkillEvaluationMethodService {
   //  List<SkillEvaluationMethod> getAllEvaluationMethodBySkillId(Long skillId);
     SkillEvaluationMethod createSkillEvaluationMethod(Long skillId, SkillEvaluationMethod required);
     SkillEvaluationMethod updateSkillEvaluationMethodById(Long skillEvaluationMethodId, SkillEvaluationMethod postRequest);
-    ResponseEntity<Object> deleteSkillEvaluationMethodById(Long skillEvaluationMethodId, Boolean isDelete);
+    ResponseEntity<Object> deleteSkillEvaluationMethodById(long skillEvaluationMethodId);
 }
