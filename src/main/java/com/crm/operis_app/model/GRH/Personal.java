@@ -1,5 +1,6 @@
 package com.crm.operis_app.model.GRH;
 
+import com.crm.operis_app.model.action.actionCorrection.PlanAction;
 import com.crm.operis_app.model.authUser.User;
 import com.crm.operis_app.model.files.FileModel;
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -102,7 +103,13 @@ public class Personal implements Serializable {
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Set<SkillEvaluationMethod> skillEvaluationMethods;
 
-    //-----------------------------//
+    //--------------PLAN_ACTION---------------//
+
+    @OneToMany(mappedBy = "personal",fetch = FetchType.LAZY)
+    @JsonIgnore
+    private Set<PlanAction> planAction  ;
+
+
     public Long getId() {
         return id;
     }
@@ -278,6 +285,14 @@ public class Personal implements Serializable {
 
     public void setSkillEvaluationMethods(Set<SkillEvaluationMethod> skillEvaluationMethods) {
         this.skillEvaluationMethods = skillEvaluationMethods;
+    }
+
+    public Set<PlanAction> getPlanAction() {
+        return planAction;
+    }
+
+    public void setPlanAction(Set<PlanAction> planAction) {
+        this.planAction = planAction;
     }
 }
 

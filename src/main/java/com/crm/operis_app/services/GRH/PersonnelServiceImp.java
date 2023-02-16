@@ -4,12 +4,14 @@ import com.crm.operis_app.exception.ResourceNotFoundException;
 import com.crm.operis_app.model.GRH.Formation;
 import com.crm.operis_app.model.GRH.Personal;
 import com.crm.operis_app.model.GRH.Post;
+import com.crm.operis_app.model.action.actionCorrection.PlanAction;
 import com.crm.operis_app.model.audit.ListeAudit;
 import com.crm.operis_app.model.authUser.User;
 
 import com.crm.operis_app.repository.GRH.FormationRepository;
 import com.crm.operis_app.repository.GRH.PostRepository;
 import com.crm.operis_app.repository.Utils.PersonnelRepository;
+import com.crm.operis_app.repository.action.PlanActionRepository;
 import com.crm.operis_app.repository.audit.ListeAuditRepository;
 import com.crm.operis_app.repository.authUser.UserRepository;
 import javassist.NotFoundException;
@@ -36,6 +38,8 @@ public class PersonnelServiceImp implements PersonnelService {
     FormationRepository formationRepository;
     @Autowired
     ListeAuditRepository listeAuditRepository;
+    @Autowired
+    PlanActionRepository planActionRepository;
 
     Long formationId;
     Long personnelId;
@@ -187,7 +191,7 @@ public void addParticipantToFormation(Long formationId, Long personnelId) {
         formation.getPersonnels().remove(personal);
         formationRepository.save(formation);
     }
-    //----------------------addPersonnalToFormation------------------//
+    //----------------------addPersonnalToAudit------------------//
     @Override
     public void addPersonalAudit(Long auditId, Long personalId) {
         ListeAudit formation = listeAuditRepository.findById(auditId).orElseThrow(() -> new ResourceNotFoundException("formation not found"));
@@ -212,6 +216,24 @@ public void addParticipantToFormation(Long formationId, Long personnelId) {
         formation.getPersonnels().remove(personal);
         listeAuditRepository.save(formation);
     }
+    //----------------------------------planAction-------------------------------------------//
+
+
+   @Override
+public void addPersonalPlanAction(Long planId, Long personnelId) {
+    Optional<Personal> personnelById = personnelRepository.findById(personnelId);
+    if (!personnelById.isPresent()) {
+        throw new ResourceNotFoundException("Personnel with id " + personnelId + " does not exist");
+    }
+       Personal personnel = personnelById.get();
+    Optional<PlanAction> planById = planActionRepository.findById(planId);
+    if (!planById.isPresent()) {
+        throw new ResourceNotFoundException("plan with id " + planId + " does not exist");
+    }
+       PlanAction planAction = planById.get();
+       planAction.setPersonal(personnel);
+       planActionRepository.save(planAction);
+}
 
     @Override
 

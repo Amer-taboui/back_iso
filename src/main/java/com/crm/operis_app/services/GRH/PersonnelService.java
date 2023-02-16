@@ -23,5 +23,5 @@ public interface PersonnelService {
     List<Map<String,Object>>getPersonals();
     void addPersonalAudit(Long auditId, Long personalId);
     void removePersonalAudit(Long personalId, Long auditId);
-
+   void addPersonalPlanAction(Long planId, Long personalId);
 }

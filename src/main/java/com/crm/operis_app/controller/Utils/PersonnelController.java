@@ -104,7 +104,11 @@ public void addPersonalToFormation(@PathVariable Long formationId, @PathVariable
     public void removePersonalAudit(@PathVariable(value = "personalId") Long personalId, @PathVariable(value = "auditId") Long auditId) {
         personnelServiceImp.removePersonalAudit(personalId, auditId);
     }
-
+    //--------------------------------plan action------------------------//
+    @PostMapping(value = "/planAction/{planId}/addPersonnel/{personnelId}")
+    public void  addPersonnelToEquipeAction(@PathVariable(value = "planId") Long planId, @PathVariable(value = "personnelId") Long personnelId) {
+        personnelServiceImp.addPersonalPlanAction(planId,personnelId);
+    }
 
     @GetMapping("/skill")
     public List<Map<String,Object>> getPersonalsWithSkills() {

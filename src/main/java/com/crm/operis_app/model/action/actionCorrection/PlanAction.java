@@ -1,5 +1,6 @@
 package com.crm.operis_app.model.action.actionCorrection;
 
+import com.crm.operis_app.model.GRH.Personal;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -23,6 +24,11 @@ public class PlanAction {
     @Column(name="COMMENTAIRE_SUIVI")
     private String commentaireSuivi;
 
+
+    @OrderBy("id ASC")
+    @ManyToOne
+    @JoinColumn(name = "PERSONNEL_ID")
+    private Personal personal;
 
     //-----------------ListeActionCorrection-------------------------//
 
@@ -80,5 +86,13 @@ public class PlanAction {
     @JsonIgnore
     public void setListeActionCorrection(ListeActionCorrection listeActionCorrection) {
         this.listeActionCorrection = listeActionCorrection;
+    }
+
+    public Personal getPersonal() {
+        return personal;
+    }
+
+    public void setPersonal(Personal personal) {
+        this.personal = personal;
     }
 }

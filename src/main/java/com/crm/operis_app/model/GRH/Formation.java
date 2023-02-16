@@ -35,6 +35,15 @@ public class Formation {
     @Column(name = "TYPE_FORMATION")
     private String typeFormation ;
 
+    @JsonFormat(pattern="yyyy-MM-dd")
+    @Column(name="DATE_PLANNED")
+    private Date plannedDate;
+
+    @JsonFormat(pattern="yyyy-MM-dd")
+    @Column(name="PLANNED_END_DATE")
+    private Date plannedEndDate;
+
+
     @Column(name = "DURATION")
     private String duration ;
 
@@ -62,6 +71,10 @@ public class Formation {
     @JsonFormat(pattern="yyyy-MM-dd")
     @Column(name="REALIZATION_DATE")
     private Date realizationDate;
+
+    @JsonFormat(pattern="yyyy-MM-dd")
+    @Column(name="END_REALIZATION_DATE")
+    private Date endRealizationDate;
 
     @Column(name = "COMMENT")
     private String comment ;
@@ -311,5 +324,29 @@ private Set<Post> post;
 
     public void setPersonnels(Set<Personal> personnels) {
         this.personnels = personnels;
+    }
+
+    public Date getEndRealizationDate() {
+        return endRealizationDate;
+    }
+
+    public void setEndRealizationDate(Date endRealizationDate) {
+        this.endRealizationDate = endRealizationDate;
+    }
+
+    public Date getPlannedDate() {
+        return plannedDate;
+    }
+
+    public void setPlannedDate(Date plannedDate) {
+        this.plannedDate = plannedDate;
+    }
+
+    public Date getPlannedEndDate() {
+        return plannedEndDate;
+    }
+
+    public void setPlannedEndDate(Date plannedEndDate) {
+        this.plannedEndDate = plannedEndDate;
     }
 }
