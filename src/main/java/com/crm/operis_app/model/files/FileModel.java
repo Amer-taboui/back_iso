@@ -4,6 +4,7 @@ package com.crm.operis_app.model.files;
 import com.crm.operis_app.model.GRH.Formation;
 import com.crm.operis_app.model.GRH.Post;
 import com.crm.operis_app.model.action.actionCorrection.ListeActionCorrection;
+import com.crm.operis_app.model.reclamation.ListeReclamation;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonView;
 import lombok.AllArgsConstructor;
@@ -47,7 +48,9 @@ public class FileModel {
     @JsonIgnore
     private Set<ListeActionCorrection> listeActionCorrection;
 
-
+    @ManyToMany(fetch = FetchType.LAZY,	cascade = CascadeType.ALL,mappedBy = "fileModels")
+    @JsonIgnore
+    private Set<ListeReclamation> listeReclamation;
 
     public FileModel(String name, String mimetype, byte[] pic) {
         this.name = name;
@@ -110,5 +113,13 @@ public class FileModel {
 
     public void setListeActionCorrection(Set<ListeActionCorrection> listeActionCorrection) {
         this.listeActionCorrection = listeActionCorrection;
+    }
+
+    public Set<ListeReclamation> getListeReclamation() {
+        return listeReclamation;
+    }
+
+    public void setListeReclamation(Set<ListeReclamation> listeReclamation) {
+        this.listeReclamation = listeReclamation;
     }
 }

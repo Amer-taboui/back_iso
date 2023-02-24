@@ -24,4 +24,10 @@ public interface PersonnelService {
     void addPersonalAudit(Long auditId, Long personalId);
     void removePersonalAudit(Long personalId, Long auditId);
    void addPersonalPlanAction(Long planId, Long personalId);
+    void addPersonalValidationAction(Long validationId, Long personnelId);
+    void addPersonalEtatAction(Long etatId, Long personnelId);
+    void addPersonalAnalyseReclamation(Long analyseId, Long personnelId);
+    void addPersonalClotureReclamation(Long clotureId, Long personnelId);
+    void addPersonalCreationReclamation(Long crationId, Long personnelId);
+
 }

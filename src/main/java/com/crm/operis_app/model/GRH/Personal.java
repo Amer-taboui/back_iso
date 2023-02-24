@@ -1,8 +1,13 @@
 package com.crm.operis_app.model.GRH;
 
+import com.crm.operis_app.model.action.actionCorrection.EtatAction;
 import com.crm.operis_app.model.action.actionCorrection.PlanAction;
+import com.crm.operis_app.model.action.actionCorrection.ValidationAction;
 import com.crm.operis_app.model.authUser.User;
 import com.crm.operis_app.model.files.FileModel;
+import com.crm.operis_app.model.reclamation.AnalyseReclamation;
+import com.crm.operis_app.model.reclamation.ClotureReclamation;
+import com.crm.operis_app.model.reclamation.CreationReclamation;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
@@ -108,6 +113,32 @@ public class Personal implements Serializable {
     @OneToMany(mappedBy = "personal",fetch = FetchType.LAZY)
     @JsonIgnore
     private Set<PlanAction> planAction  ;
+    //--------------Validation_ACTION---------------//
+
+    @OneToMany(mappedBy = "personal",fetch = FetchType.LAZY)
+    @JsonIgnore
+    private Set<ValidationAction> validationAction  ;
+    //--------------EtatACTION---------------//
+
+    @OneToMany(mappedBy = "personal",fetch = FetchType.LAZY)
+    @JsonIgnore
+    private Set<EtatAction> etatAction  ;
+
+    //--------------analyseReclamation---------------//
+
+    @OneToMany(mappedBy = "personal",fetch = FetchType.LAZY)
+    @JsonIgnore
+    private Set<AnalyseReclamation> analyseReclamation  ;
+    //--------------clotureReclamation---------------//
+
+    @OneToMany(mappedBy = "personal",fetch = FetchType.LAZY)
+    @JsonIgnore
+    private Set<ClotureReclamation> clotureReclamation  ;
+    //--------------creationReclamation---------------//
+
+    @OneToMany(mappedBy = "personal",fetch = FetchType.LAZY)
+    @JsonIgnore
+    private Set<CreationReclamation> creationReclamation  ;
 
 
     public Long getId() {
@@ -293,6 +324,46 @@ public class Personal implements Serializable {
 
     public void setPlanAction(Set<PlanAction> planAction) {
         this.planAction = planAction;
+    }
+
+    public Set<ValidationAction> getValidationAction() {
+        return validationAction;
+    }
+
+    public void setValidationAction(Set<ValidationAction> validationAction) {
+        this.validationAction = validationAction;
+    }
+
+    public Set<EtatAction> getEtatAction() {
+        return etatAction;
+    }
+
+    public void setEtatAction(Set<EtatAction> etatAction) {
+        this.etatAction = etatAction;
+    }
+
+    public Set<AnalyseReclamation> getAnalyseReclamation() {
+        return analyseReclamation;
+    }
+
+    public void setAnalyseReclamation(Set<AnalyseReclamation> analyseReclamation) {
+        this.analyseReclamation = analyseReclamation;
+    }
+
+    public Set<ClotureReclamation> getClotureReclamation() {
+        return clotureReclamation;
+    }
+
+    public void setClotureReclamation(Set<ClotureReclamation> clotureReclamation) {
+        this.clotureReclamation = clotureReclamation;
+    }
+
+    public Set<CreationReclamation> getCreationReclamation() {
+        return creationReclamation;
+    }
+
+    public void setCreationReclamation(Set<CreationReclamation> creationReclamation) {
+        this.creationReclamation = creationReclamation;
     }
 }
 

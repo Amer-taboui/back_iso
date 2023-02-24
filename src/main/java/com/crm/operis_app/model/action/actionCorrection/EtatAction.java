@@ -1,5 +1,6 @@
 package com.crm.operis_app.model.action.actionCorrection;
 
+import com.crm.operis_app.model.GRH.Personal;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -31,6 +32,12 @@ public class EtatAction {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "listeActionCorrectionId")
     private ListeActionCorrection listeActionCorrection;
+//--------------personaltoEtat------------------------------/
+    @OrderBy("id ASC")
+    @ManyToOne
+    @JoinColumn(name = "PERSONNEL_ID")
+    private Personal personal;
+  //----------------------------//
 
 
     public Long getId() {
@@ -72,5 +79,13 @@ public class EtatAction {
     @JsonIgnore
     public void setListeActionCorrection(ListeActionCorrection listeActionCorrection) {
         this.listeActionCorrection = listeActionCorrection;
+    }
+
+    public Personal getPersonal() {
+        return personal;
+    }
+
+    public void setPersonal(Personal personal) {
+        this.personal = personal;
     }
 }

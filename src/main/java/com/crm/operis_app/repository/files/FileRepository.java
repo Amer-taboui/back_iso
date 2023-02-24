@@ -14,6 +14,7 @@ import java.util.List;
 @Repository
 public interface FileRepository extends JpaRepository<FileModel, Long> {
     List<FileModel> findByFormationId(Long id);
+    List<FileModel> findByListeReclamationId(Long id);
     List<FileModel> findByPostId(Long id);
     List<FileModel> findByListeActionCorrectionId(Long id);
 

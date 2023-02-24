@@ -110,6 +110,37 @@ public void addPersonalToFormation(@PathVariable Long formationId, @PathVariable
         personnelServiceImp.addPersonalPlanAction(planId,personnelId);
     }
 
+    //--------------------------------validation action------------------------//
+    @PostMapping(value = "/validationAction/{validationActionId}/addPersonnel/{personnelId}")
+    public void  addPersonalValidationAction(@PathVariable(value = "validationActionId") Long planId, @PathVariable(value = "personnelId") Long personnelId) {
+        personnelServiceImp.addPersonalValidationAction(planId,personnelId);
+    }
+
+    //--------------------------------etat-action------------------------//
+    @PostMapping(value = "/etatAction/{etatId}/addPersonnel/{personnelId}")
+    public void  addPersonalEtatAction(@PathVariable(value = "etatId") Long planId, @PathVariable(value = "personnelId") Long personnelId) {
+        personnelServiceImp.addPersonalEtatAction(planId,personnelId);
+    }
+    //--------------------------------analyseReclamation------------------------//
+    @PostMapping(value = "/analyseReclamation/{analyseReclamationId}/addPersonnel/{personnelId}")
+    public void  addPersonalAnalyseReclamation(@PathVariable(value = "analyseReclamationId") Long planId, @PathVariable(value = "personnelId") Long personnelId) {
+        personnelServiceImp.addPersonalAnalyseReclamation(planId,personnelId);
+    }
+
+    //--------------------------------clotureReclamation------------------------//
+    @PostMapping(value = "/clotureReclamation/{clotureReclamationId}/addPersonnel/{personnelId}")
+    public void  addPersonalClotureReclamation(@PathVariable(value = "clotureReclamationId") Long planId, @PathVariable(value = "personnelId") Long personnelId) {
+        personnelServiceImp.addPersonalClotureReclamation(planId,personnelId);
+    }
+
+    //-------------------------------creationReclamation------------------------//
+    @PostMapping(value = "/creationReclamation/{creationReclamationId}/addPersonnel/{personnelId}")
+    public void  addPersonalCreationReclamation(@PathVariable(value = "creationReclamationId") Long planId, @PathVariable(value = "personnelId") Long personnelId) {
+        personnelServiceImp.addPersonalCreationReclamation(planId,personnelId);
+    }
+
+
+
     @GetMapping("/skill")
     public List<Map<String,Object>> getPersonalsWithSkills() {
         return personnelServiceImp.getPersonals();

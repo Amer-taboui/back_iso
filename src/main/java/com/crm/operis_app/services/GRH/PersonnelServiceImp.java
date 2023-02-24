@@ -4,16 +4,26 @@ import com.crm.operis_app.exception.ResourceNotFoundException;
 import com.crm.operis_app.model.GRH.Formation;
 import com.crm.operis_app.model.GRH.Personal;
 import com.crm.operis_app.model.GRH.Post;
+import com.crm.operis_app.model.action.actionCorrection.EtatAction;
 import com.crm.operis_app.model.action.actionCorrection.PlanAction;
+import com.crm.operis_app.model.action.actionCorrection.ValidationAction;
 import com.crm.operis_app.model.audit.ListeAudit;
 import com.crm.operis_app.model.authUser.User;
 
+import com.crm.operis_app.model.reclamation.AnalyseReclamation;
+import com.crm.operis_app.model.reclamation.ClotureReclamation;
+import com.crm.operis_app.model.reclamation.CreationReclamation;
 import com.crm.operis_app.repository.GRH.FormationRepository;
 import com.crm.operis_app.repository.GRH.PostRepository;
 import com.crm.operis_app.repository.Utils.PersonnelRepository;
+import com.crm.operis_app.repository.action.EtatActionRepository;
 import com.crm.operis_app.repository.action.PlanActionRepository;
+import com.crm.operis_app.repository.action.ValidationActionRepository;
 import com.crm.operis_app.repository.audit.ListeAuditRepository;
 import com.crm.operis_app.repository.authUser.UserRepository;
+import com.crm.operis_app.repository.reclamation.AnalyseReclamationRepository;
+import com.crm.operis_app.repository.reclamation.ClotureReclamationRepository;
+import com.crm.operis_app.repository.reclamation.CreationReclamationRepository;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -40,6 +50,16 @@ public class PersonnelServiceImp implements PersonnelService {
     ListeAuditRepository listeAuditRepository;
     @Autowired
     PlanActionRepository planActionRepository;
+    @Autowired
+    ValidationActionRepository validationActionRepository;
+    @Autowired
+    EtatActionRepository etatActionRepository;
+    @Autowired
+    AnalyseReclamationRepository analyseReclamationRepository;
+    @Autowired
+    ClotureReclamationRepository  clotureReclamationRepository;
+    @Autowired
+    CreationReclamationRepository creationReclamationRepository;
 
     Long formationId;
     Long personnelId;
@@ -234,6 +254,83 @@ public void addPersonalPlanAction(Long planId, Long personnelId) {
        planAction.setPersonal(personnel);
        planActionRepository.save(planAction);
 }
+
+    @Override
+    public void addPersonalValidationAction(Long validationId, Long personnelId) {
+        Optional<Personal> personnelById = personnelRepository.findById(personnelId);
+        if (!personnelById.isPresent()) {
+            throw new ResourceNotFoundException("Personnel with id " + personnelId + " does not exist");
+        }
+        Personal personnel = personnelById.get();
+        Optional<ValidationAction> planById = validationActionRepository.findById(validationId);
+        if (!planById.isPresent()) {
+            throw new ResourceNotFoundException("validationId with id " + validationId + " does not exist");
+        }
+        ValidationAction validationAction = planById.get();
+        validationAction.setPersonal(personnel);
+        validationActionRepository.save(validationAction);
+    }
+
+    @Override
+    public void addPersonalEtatAction(Long etatId, Long personnelId) {
+        Optional<Personal> personnelById = personnelRepository.findById(personnelId);
+        if (!personnelById.isPresent()) {
+            throw new ResourceNotFoundException("Personnel with id " + personnelId + " does not exist");
+        }
+        Personal personnel = personnelById.get();
+        Optional<EtatAction> etatById = etatActionRepository.findById(etatId);
+        if (!etatById.isPresent()) {
+            throw new ResourceNotFoundException("etat with id " + etatId + " does not exist");
+        }
+        EtatAction etatAction = etatById.get();
+        etatAction.setPersonal(personnel);
+        etatActionRepository.save(etatAction);
+    }
+    @Override
+    public void addPersonalAnalyseReclamation(Long analyseId, Long personnelId) {
+        Optional<Personal> personnelById = personnelRepository.findById(personnelId);
+        if (!personnelById.isPresent()) {
+            throw new ResourceNotFoundException("Personnel with id " + personnelId + " does not exist");
+        }
+        Personal personnel = personnelById.get();
+        Optional<AnalyseReclamation> etatById = analyseReclamationRepository.findById(analyseId);
+        if (!etatById.isPresent()) {
+            throw new ResourceNotFoundException("etat with id " + analyseId + " does not exist");
+        }
+        AnalyseReclamation etatAction = etatById.get();
+        etatAction.setPersonal(personnel);
+        analyseReclamationRepository.save(etatAction);
+    }
+    @Override
+    public void addPersonalClotureReclamation(Long clotureId, Long personnelId) {
+        Optional<Personal> personnelById = personnelRepository.findById(personnelId);
+        if (!personnelById.isPresent()) {
+            throw new ResourceNotFoundException("Personnel with id " + personnelId + " does not exist");
+        }
+        Personal personnel = personnelById.get();
+        Optional<ClotureReclamation> etatById = clotureReclamationRepository.findById(clotureId);
+        if (!etatById.isPresent()) {
+            throw new ResourceNotFoundException("cloture with id " + clotureId + " does not exist");
+        }
+        ClotureReclamation etatAction = etatById.get();
+        etatAction.setPersonal(personnel);
+        clotureReclamationRepository.save(etatAction);
+    }
+    @Override
+    public void addPersonalCreationReclamation(Long crationId, Long personnelId) {
+        Optional<Personal> personnelById = personnelRepository.findById(personnelId);
+        if (!personnelById.isPresent()) {
+            throw new ResourceNotFoundException("Personnel with id " + personnelId + " does not exist");
+        }
+        Personal personnel = personnelById.get();
+        Optional<CreationReclamation> etatById = creationReclamationRepository.findById(crationId);
+        if (!etatById.isPresent()) {
+            throw new ResourceNotFoundException("cration with id " + crationId + " does not exist");
+        }
+        CreationReclamation etatAction = etatById.get();
+        etatAction.setPersonal(personnel);
+        creationReclamationRepository.save(etatAction);
+    }
 
     @Override
 

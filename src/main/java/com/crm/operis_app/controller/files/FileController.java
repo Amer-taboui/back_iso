@@ -227,7 +227,23 @@ public class FileController {
 
         }
     }
+    /** ADD /REMOVE Files By RECLAMATION */
 
+    @JsonView(View.FileInfo.class)
+    @GetMapping("/reclamation/{id}/files")
+    public List<FileModel> getListFilesByReclamation(@PathVariable(value = "id") Long id) {
+        return fileRepository.findByListeReclamationId(id);
+    }
+
+    @PostMapping(value = "/reclamation/{reclamationId}/addFile/{fileId}")
+    public void addFileToReclamation(@PathVariable(value = "reclamationId") Long formationId, @PathVariable(value = "fileId") Long fileId) {
+        fileService.addFileToReclamation(formationId,fileId);
+    }
+
+    @PostMapping(value = "/reclamation/{reclamationId}/removeFile/{fileId}")
+    public void removeFileFromReclamation(@PathVariable(value = "reclamationId") Long formationId, @PathVariable(value = "fileId") Long fileId) {
+        fileService.removeFileFromReclamation(formationId,fileId);
+    }
 
 
 }
