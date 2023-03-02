@@ -62,7 +62,7 @@ public class ConstatAuditService {
             throw new ResourceNotFoundException("ValidationAction with id " + action1Id + " not found");
         }
         ConstatAudit liste1 = Liste.get();
-        liste1.setConstat(validationAction.getConstat());
+        liste1.setConstatAudit(validationAction.getConstatAudit());
         liste1.setCategoryConstat(validationAction.getCategoryConstat());
         liste1.setEtatConstat(validationAction.isEtatConstat());
         liste1.setChapitre(validationAction.getChapitre());
@@ -71,6 +71,7 @@ public class ConstatAuditService {
         liste1.setTypeConstat(validationAction.getTypeConstat());
         liste1.setRisque(validationAction.getRisque());
         liste1.setNorme(validationAction.getNorme());
+        liste1.setDateClotureConstat(validationAction.getDateClotureConstat());
 
         return  constatAuditRepository.save(liste1);
     }

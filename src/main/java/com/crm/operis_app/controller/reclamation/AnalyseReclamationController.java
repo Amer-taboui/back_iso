@@ -7,6 +7,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigInteger;
 import java.util.List;
 import java.util.Optional;
 
@@ -36,7 +37,7 @@ public class AnalyseReclamationController {
     }
 
 
-    @PutMapping(value = "/updateEtatActionById/{analyseReclamationId}",consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(value = "/updateAnalyseReclamationById/{analyseReclamationId}",consumes = MediaType.APPLICATION_JSON_VALUE)
     public AnalyseReclamation updateEtatActionById(@PathVariable(value = "analyseReclamationId") Long listeId, @RequestBody AnalyseReclamation etatAction) {
         return analyseReclamationService.updateAnalyseReclamationById(listeId, etatAction);
     }
@@ -45,6 +46,9 @@ public class AnalyseReclamationController {
     public ResponseEntity<Object> deleteAnalyseReclamationById(@PathVariable(value = "analyseReclamationId") long listeId) {
         return analyseReclamationService.deleteAnalyseReclamationById(listeId);
     }
-
+    @GetMapping(value = "/analyseReclamationPersonnelIds/reclamation/{reclamationId}")
+    public List<BigInteger> getPersonnelIdListByReclamation(@PathVariable(value = "reclamationId") Long reclamationId) {
+        return analyseReclamationService.getPersonnelIdListByReclamation(reclamationId);
+    }
 
 }

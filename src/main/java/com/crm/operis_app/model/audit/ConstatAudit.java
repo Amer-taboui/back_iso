@@ -27,7 +27,7 @@ public class ConstatAudit {
         @Column(name = "CHAPITRE")
         private String chapitre;
         @Column(name = "CONSTAT")
-        private String constat;
+        private String constatAudit;
         @Column(name = "LIBELLE")
         private String libelle;
         @Column(name = "RISQUE")
@@ -89,12 +89,12 @@ public class ConstatAudit {
                 this.chapitre = chapitre;
         }
 
-        public String getConstat() {
-                return constat;
+        public String getConstatAudit() {
+                return constatAudit;
         }
 
-        public void setConstat(String constat) {
-                this.constat = constat;
+        public void setConstatAudit(String constatAudit) {
+                this.constatAudit = constatAudit;
         }
 
         public String getLibelle() {

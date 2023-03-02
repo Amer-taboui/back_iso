@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+
+import java.math.BigInteger;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
@@ -71,4 +73,8 @@ public class AnalyseReclamationService {
         return ResponseEntity.ok().build();
     }
 
+
+    public List<BigInteger> getPersonnelIdListByReclamation(Long actionId) {
+        return analyseReclamationRepository.findPersonnelIdListByAnalyseReclamation(actionId);
+    }
 }

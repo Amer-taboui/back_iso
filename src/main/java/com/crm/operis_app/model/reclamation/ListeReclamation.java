@@ -64,6 +64,11 @@ public class ListeReclamation {
     @Column(name = "ACTIVE")
     private Boolean active = true;
 
+    //----------------------------Reclamation-COST--------------------------------------//
+    @OneToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+    @JoinColumn(name = "RECLAMATION_COST_ID" ,nullable = true)
+    private ReclamationCost reclamationCost;
+
     //-----------------analyseReclamation-------------------------//
     @OrderBy("id ASC")
     @OneToMany(mappedBy = "listeReclamation", cascade = CascadeType.ALL, fetch = FetchType.LAZY )
@@ -228,5 +233,13 @@ public class ListeReclamation {
 
     public void setClotureReclamation(Set<ClotureReclamation> clotureReclamation) {
         this.clotureReclamation = clotureReclamation;
+    }
+
+    public ReclamationCost getReclamationCost() {
+        return reclamationCost;
+    }
+
+    public void setReclamationCost(ReclamationCost reclamationCost) {
+        this.reclamationCost = reclamationCost;
     }
 }
