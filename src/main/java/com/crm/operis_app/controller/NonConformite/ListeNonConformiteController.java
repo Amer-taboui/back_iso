@@ -1,7 +1,6 @@
 package com.crm.operis_app.controller.NonConformite;
 
 import com.crm.operis_app.model.NonConformite.ListeNonConformite;
-import com.crm.operis_app.model.reclamation.ListeReclamation;
 import com.crm.operis_app.services.NonConformite.ListeNonConformiteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -29,7 +28,7 @@ public class ListeNonConformiteController {
         return listeNonConformiteService.getArchivedListeNonConformite();
     }
 
-    @RequestMapping(value = "NonConformite/{nonConformiteId}", method = RequestMethod.GET)
+    @RequestMapping(value = "nonConformite/{nonConformiteId}", method = RequestMethod.GET)
     public Optional<ListeNonConformite> getListeNonConformiteById(@PathVariable(value = "nonConformiteId") Long reclamationId) {
         return listeNonConformiteService.getListeNonConformiteById(reclamationId);
     }

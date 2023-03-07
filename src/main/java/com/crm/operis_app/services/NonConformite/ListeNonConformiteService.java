@@ -2,9 +2,7 @@ package com.crm.operis_app.services.NonConformite;
 
 import com.crm.operis_app.exception.ResourceNotFoundException;
 import com.crm.operis_app.model.NonConformite.ListeNonConformite;
-import com.crm.operis_app.model.reclamation.ListeReclamation;
 import com.crm.operis_app.repository.NonConformite.ListeNonConformiteRepository;
-import com.crm.operis_app.repository.reclamation.ListeReclamationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;

@@ -1,7 +1,11 @@
 package com.crm.operis_app.services.NonConformite.Utils;
 
 import com.crm.operis_app.exception.ResourceNotFoundException;
+import com.crm.operis_app.model.NonConformite.ListeNonConformite;
+import com.crm.operis_app.model.NonConformite.Utils.CategorieNonConformite;
+import com.crm.operis_app.model.NonConformite.Utils.GraviteNonConformite;
 import com.crm.operis_app.model.NonConformite.Utils.OrigineNonConformite;
+import com.crm.operis_app.repository.NonConformite.ListeNonConformiteRepository;
 import com.crm.operis_app.repository.NonConformite.Utils.OrigineNonConformiteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +19,9 @@ public class OrigineNonConformiteService {
 
     @Autowired
     OrigineNonConformiteRepository origineNonConformiteRepository;
+
+    @Autowired
+    ListeNonConformiteRepository listeNonConformiteRepository;
 
     public List<OrigineNonConformite> getOrigineNonConformite() {
         return origineNonConformiteRepository.findByActiveIsTrueOrderByOrigineIdAsc();
@@ -60,4 +67,39 @@ public class OrigineNonConformiteService {
 //        siteRepository.deleteById(siteId);
         return ResponseEntity.ok().build();
     }
+
+    //-------------------------------------addCategorieToNonConformite------------------//
+    public void addOrigineToNonConformite(Long nonConformiteId, Long origineId) {
+        Optional<OrigineNonConformite> origineById = origineNonConformiteRepository.findById(origineId);
+        if (!origineById.isPresent()) {
+            throw new ResourceNotFoundException("origine with id " + origineId + " does not exist");
+        }
+        OrigineNonConformite origineNonConformite = origineById.get();
+
+        Optional<ListeNonConformite> nonConformiteById = listeNonConformiteRepository.findById(nonConformiteId);
+        if (!nonConformiteById.isPresent()) {
+            throw new ResourceNotFoundException("Nc with id " + nonConformiteId + " does not exist");
+        }
+        ListeNonConformite listeNonConformite = nonConformiteById.get();
+
+        listeNonConformite.getOrigineNonConformite().add(origineNonConformite);
+        listeNonConformiteRepository.save(listeNonConformite);
+    }
+
+    public void removeOrigineFromNonConformite(Long nonConformiteId, Long origineId) {
+        Optional<OrigineNonConformite> origineById = origineNonConformiteRepository.findById(origineId);
+        if (!origineById.isPresent()) {
+            throw new ResourceNotFoundException("origine with id " + origineId + " does not exist");
+        }
+        OrigineNonConformite origineNonConformite = origineById.get();
+
+        Optional<ListeNonConformite> nonConformiteById = listeNonConformiteRepository.findById(nonConformiteId);
+        if (!nonConformiteById.isPresent()) {
+            throw new ResourceNotFoundException("Nc with id " + nonConformiteId + " does not exist");
+        }
+        ListeNonConformite listeNonConformite = nonConformiteById.get();
+        listeNonConformite.getOrigineNonConformite().remove(origineNonConformite);
+        listeNonConformiteRepository.save(listeNonConformite);
+    }
+
 }

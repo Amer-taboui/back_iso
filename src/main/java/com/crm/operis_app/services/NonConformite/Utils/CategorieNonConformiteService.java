@@ -1,7 +1,9 @@
 package com.crm.operis_app.services.NonConformite.Utils;
 
 import com.crm.operis_app.exception.ResourceNotFoundException;
+import com.crm.operis_app.model.NonConformite.ListeNonConformite;
 import com.crm.operis_app.model.NonConformite.Utils.CategorieNonConformite;
+import com.crm.operis_app.repository.NonConformite.ListeNonConformiteRepository;
 import com.crm.operis_app.repository.NonConformite.Utils.CategorieNonConformiteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +16,8 @@ import java.util.Optional;
 public class CategorieNonConformiteService {
     @Autowired
     CategorieNonConformiteRepository categorieNonConformiteRepository;
-
+    @Autowired
+    ListeNonConformiteRepository listeNonConformiteRepository;
 
     public List<CategorieNonConformite> getCategorieNonConformite() {
         return categorieNonConformiteRepository.findByActiveIsTrueOrderByCategorieIdAsc();
@@ -60,4 +63,46 @@ public class CategorieNonConformiteService {
 //        siteRepository.deleteById(siteId);
         return ResponseEntity.ok().build();
     }
+
+    //-------------------------------------addCategorieToNonConformite------------------//
+    public void addCategorieToNonConformite(Long actionId, Long siteId) {
+        Optional<CategorieNonConformite> siteById = categorieNonConformiteRepository.findById(siteId);
+        if (!siteById.isPresent()) {
+            throw new ResourceNotFoundException("site with id " + siteId + " does not exist");
+        }
+        CategorieNonConformite site = siteById.get();
+
+        Optional<ListeNonConformite> actionById = listeNonConformiteRepository.findById(actionId);
+        if (!actionById.isPresent()) {
+            throw new ResourceNotFoundException("action with id " + actionId + " does not exist");
+        }
+        ListeNonConformite action = actionById.get();
+
+        action.getCategorieNonConformite().add(site);
+        listeNonConformiteRepository.save(action);
+    }
+
+    public void removeCategorieFromNonConformite(Long actionId, Long siteId) {
+        Optional<CategorieNonConformite> siteById = categorieNonConformiteRepository.findById(siteId);
+        if (!siteById.isPresent()) {
+            throw new ResourceNotFoundException("site with id " + siteId + " does not exist");
+        }
+        CategorieNonConformite site = siteById.get();
+
+        Optional<ListeNonConformite> actionById = listeNonConformiteRepository.findById(actionId);
+        if (!actionById.isPresent()) {
+            throw new ResourceNotFoundException("action with id " + actionId + " does not exist");
+        }
+        ListeNonConformite action = actionById.get();
+        action.getCategorieNonConformite().remove(site);
+        listeNonConformiteRepository.save(action);
+    }
+
+
+
+
+
+
+
+
 }

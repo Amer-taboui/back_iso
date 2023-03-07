@@ -45,12 +45,10 @@ public class ListeReclamationController {
     }
 
 
-
     @DeleteMapping(value = "/reclamation/{id}")
     public ResponseEntity<Object> deleteReclamationById(@PathVariable(value = "id") Long id) {
         return listeReclamationService.deleteReclamationById(id);
     }
-
 
 
 }

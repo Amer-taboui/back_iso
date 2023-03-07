@@ -47,4 +47,20 @@ public class CategorieNonConformiteController {
     public ResponseEntity<Object> deleteSiteById(@PathVariable(value = "categorieId") Long siteId , @PathVariable(value = "isDelete") Boolean isDelete) {
         return categorieNonConformiteService.deleteCategorieNonConformiteById(siteId,isDelete);
     }
+
+//-------------------------------------addCategorieToNonConformite------------------//
+
+    @PostMapping(value = "/nonConformite/{nonConformiteId}/categorie/{categorieId}")
+    public void addCategorieToNonConformite(@PathVariable(value = "nonConformiteId") Long actionId, @PathVariable(value = "categorieId") Long siteId) {
+        categorieNonConformiteService.addCategorieToNonConformite(actionId,siteId);
+    }
+
+    @PostMapping(value = "/nonConformites/{nonConformiteId}/categorie/{categorieId}")
+    public void removeCategorieFromNonConformite(@PathVariable(value = "nonConformiteId") Long actionId, @PathVariable(value = "categorieId") Long siteId) {
+        categorieNonConformiteService.removeCategorieFromNonConformite(actionId,siteId);
+    }
+
+
+
+
 }

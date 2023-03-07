@@ -12,7 +12,7 @@ import javax.persistence.*;
 public class GraviteNonConformite {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="CATEGORIE_ID")
+    @Column(name="GRAVITE_ID")
     private Long graviteId;
 
     @Column(name="GRAVITE_NC")

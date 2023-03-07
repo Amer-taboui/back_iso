@@ -1,5 +1,8 @@
 package com.crm.operis_app.model.GRH;
 
+import com.crm.operis_app.model.NonConformite.ClotureNonConformite;
+import com.crm.operis_app.model.NonConformite.ListeNonConformite;
+import com.crm.operis_app.model.NonConformite.ValidationNonConformite;
 import com.crm.operis_app.model.action.actionCorrection.EtatAction;
 import com.crm.operis_app.model.action.actionCorrection.PlanAction;
 import com.crm.operis_app.model.action.actionCorrection.ValidationAction;
@@ -139,6 +142,24 @@ public class Personal implements Serializable {
     @OneToMany(mappedBy = "personal",fetch = FetchType.LAZY)
     @JsonIgnore
     private Set<CreationReclamation> creationReclamation  ;
+
+    //--------------ValidationNc---------------//
+
+    @OneToMany(mappedBy = "personal",fetch = FetchType.LAZY)
+    @JsonIgnore
+    private Set<ValidationNonConformite> validationNonConformite  ;
+
+    //--------------ClotureNc---------------//
+
+    @OneToMany(mappedBy = "personal",fetch = FetchType.LAZY)
+    @JsonIgnore
+    private Set<ClotureNonConformite> clotureNonConformite  ;
+
+    //--------------ListeNonConformite---------------//
+
+    @OneToMany(mappedBy = "responsableDecouverte",fetch = FetchType.LAZY)
+    @JsonIgnore
+    private Set<ListeNonConformite>  responsableDecouverte  ;
 
 
     public Long getId() {
@@ -364,6 +385,30 @@ public class Personal implements Serializable {
 
     public void setCreationReclamation(Set<CreationReclamation> creationReclamation) {
         this.creationReclamation = creationReclamation;
+    }
+
+    public Set<ValidationNonConformite> getValidationNonConformite() {
+        return validationNonConformite;
+    }
+
+    public void setValidationNonConformite(Set<ValidationNonConformite> validationNonConformite) {
+        this.validationNonConformite = validationNonConformite;
+    }
+
+    public Set<ClotureNonConformite> getClotureNonConformite() {
+        return clotureNonConformite;
+    }
+
+    public void setClotureNonConformite(Set<ClotureNonConformite> clotureNonConformite) {
+        this.clotureNonConformite = clotureNonConformite;
+    }
+
+    public Set<ListeNonConformite> getResponsableDecouverte() {
+        return responsableDecouverte;
+    }
+
+    public void setResponsableDecouverte(Set<ListeNonConformite> responsableDecouverte) {
+        this.responsableDecouverte = responsableDecouverte;
     }
 }
 

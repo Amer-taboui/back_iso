@@ -5,12 +5,14 @@ import com.crm.operis_app.exception.ResourceNotFoundException;
 import com.crm.operis_app.model.GRH.Formation;
 import com.crm.operis_app.model.GRH.Personal;
 import com.crm.operis_app.model.GRH.Post;
+import com.crm.operis_app.model.NonConformite.ListeNonConformite;
 import com.crm.operis_app.model.action.actionCorrection.ListeActionCorrection;
 import com.crm.operis_app.model.files.FileModel;
 
 import com.crm.operis_app.model.reclamation.ListeReclamation;
 import com.crm.operis_app.repository.GRH.FormationRepository;
 import com.crm.operis_app.repository.GRH.PostRepository;
+import com.crm.operis_app.repository.NonConformite.ListeNonConformiteRepository;
 import com.crm.operis_app.repository.Utils.PersonnelRepository;
 import com.crm.operis_app.repository.action.ListeActionCorrectionRepository;
 import com.crm.operis_app.repository.files.FileRepository;
@@ -43,6 +45,9 @@ public class FileService {
 
     @Autowired
     ListeReclamationRepository listeReclamationRepository;
+
+    @Autowired
+    ListeNonConformiteRepository listeNonConformiteRepository;
 
     public ResponseEntity<Object> deleteFileById(Long id) {
         if (!fileRepository.existsById(id)) {
@@ -84,7 +89,7 @@ public class FileService {
         formationRepository.save(formation);
     }
 
-    /** ADD /REMOVE Files By Formation */
+    /** ADD /REMOVE Files By Reclamation */
 
     public void addFileToReclamation(Long reclamationId, Long fileId) {
         Optional<FileModel> fileById = fileRepository.findById(fileId);
@@ -115,7 +120,37 @@ public class FileService {
         listeReclamation.getFileModels().remove(file);
         listeReclamationRepository.save(listeReclamation);
     }
+    /** ADD /REMOVE Files By Reclamation */
 
+    public void addFileToNonConformite(Long nonConformiteId, Long fileId) {
+        Optional<FileModel> fileById = fileRepository.findById(fileId);
+        if (!fileById.isPresent()) {
+            throw new ResourceNotFoundException("file with id " + fileId + " does not exist");
+        }
+        FileModel file = fileById.get();
+        Optional<ListeNonConformite> reclamationById = listeNonConformiteRepository.findById(nonConformiteId);
+        if (!reclamationById.isPresent()) {
+            throw new ResourceNotFoundException("nonConformite with id " + nonConformiteId + " does not exist");
+        }
+        ListeNonConformite listeReclamation = reclamationById.get();
+        listeReclamation.getFileModels().add(file);
+        listeNonConformiteRepository.save(listeReclamation);
+    }
+
+    public void removeFileFromNonConformite(Long nonConformiteId, Long fileId) {
+        Optional<FileModel> fileById = fileRepository.findById(fileId);
+        if (!fileById.isPresent()) {
+            throw new ResourceNotFoundException("file with id " + fileId + " does not exist");
+        }
+        FileModel file = fileById.get();
+        Optional<ListeNonConformite>  reclamationById = listeNonConformiteRepository.findById(nonConformiteId);
+        if (!reclamationById.isPresent()) {
+            throw new ResourceNotFoundException("listeReclamation with id " + nonConformiteId + " does not exist");
+        }
+        ListeNonConformite listeReclamation = reclamationById.get();
+        listeReclamation.getFileModels().remove(file);
+        listeNonConformiteRepository.save(listeReclamation);
+    }
 
     /** ADD /REMOVE Files By Personal */
 

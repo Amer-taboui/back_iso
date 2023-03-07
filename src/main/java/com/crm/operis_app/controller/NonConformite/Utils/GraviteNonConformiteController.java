@@ -42,8 +42,6 @@ public class GraviteNonConformiteController {
     }
 
 
-
-
     @RequestMapping(value = "/gravite/{graviteId}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
     public GraviteNonConformite updateGravite(@PathVariable(value = "graviteId") Long graviteId, @RequestBody GraviteNonConformite site) {
         return graviteNonConformiteService.updateGraviteNonConformiteById(graviteId, site);
@@ -52,5 +50,17 @@ public class GraviteNonConformiteController {
     @RequestMapping(value = "/Gravite/{graviteId}/{isDelete}", method = RequestMethod.DELETE)
     public ResponseEntity<Object> deleteGraviteById(@PathVariable(value = "graviteId") Long siteId , @PathVariable(value = "isDelete") Boolean isDelete) {
         return graviteNonConformiteService.deleteGraviteNonConformiteById(siteId,isDelete);
+    }
+
+    //-------------------------------------addCategorieToNonConformite------------------//
+
+    @PostMapping(value = "/nonConformite/{nonConformiteId}/gravite/{graviteId}")
+    public void addGraviteToNonConformite(@PathVariable(value = "nonConformiteId") Long actionId, @PathVariable(value = "graviteId") Long siteId) {
+        graviteNonConformiteService.addGraviteToNonConformite(actionId,siteId);
+    }
+
+    @PostMapping(value = "/nonConformites/{nonConformiteId}/gravite/{graviteId}")
+    public void removeGraviteFromNonConformite(@PathVariable(value = "nonConformiteId") Long actionId, @PathVariable(value = "graviteId") Long siteId) {
+        graviteNonConformiteService.removeGraviteFromNonConformite(actionId,siteId);
     }
 }

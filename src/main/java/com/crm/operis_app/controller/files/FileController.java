@@ -245,5 +245,23 @@ public class FileController {
         fileService.removeFileFromReclamation(formationId,fileId);
     }
 
+    /** ADD /REMOVE Files By ListeNonConformite */
+
+    @JsonView(View.FileInfo.class)
+    @GetMapping("/nonConformite/{id}/files")
+    public List<FileModel> getListFilesByNonConformite(@PathVariable(value = "id") Long id) {
+        return fileRepository.findByListeNonConformiteId(id);
+    }
+
+    @PostMapping(value = "/nonConformite/{nonConformiteId}/addFile/{fileId}")
+    public void addFileToNonConformite(@PathVariable(value = "nonConformiteId") Long formationId, @PathVariable(value = "fileId") Long fileId) {
+        fileService.addFileToNonConformite(formationId,fileId);
+    }
+
+    @PostMapping(value = "/nonConformite/{nonConformiteId}/removeFile/{fileId}")
+    public void removeFileFromNonConformite(@PathVariable(value = "nonConformiteId") Long formationId, @PathVariable(value = "fileId") Long fileId) {
+        fileService.removeFileFromNonConformite(formationId,fileId);
+    }
+
 
 }

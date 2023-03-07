@@ -4,6 +4,9 @@ import com.crm.operis_app.exception.ResourceNotFoundException;
 import com.crm.operis_app.model.GRH.Formation;
 import com.crm.operis_app.model.GRH.Personal;
 import com.crm.operis_app.model.GRH.Post;
+import com.crm.operis_app.model.NonConformite.ClotureNonConformite;
+import com.crm.operis_app.model.NonConformite.ListeNonConformite;
+import com.crm.operis_app.model.NonConformite.ValidationNonConformite;
 import com.crm.operis_app.model.action.actionCorrection.EtatAction;
 import com.crm.operis_app.model.action.actionCorrection.PlanAction;
 import com.crm.operis_app.model.action.actionCorrection.ValidationAction;
@@ -15,6 +18,9 @@ import com.crm.operis_app.model.reclamation.ClotureReclamation;
 import com.crm.operis_app.model.reclamation.CreationReclamation;
 import com.crm.operis_app.repository.GRH.FormationRepository;
 import com.crm.operis_app.repository.GRH.PostRepository;
+import com.crm.operis_app.repository.NonConformite.ClotureNonConformiteRepository;
+import com.crm.operis_app.repository.NonConformite.ListeNonConformiteRepository;
+import com.crm.operis_app.repository.NonConformite.ValidationNonConformiteRepository;
 import com.crm.operis_app.repository.Utils.PersonnelRepository;
 import com.crm.operis_app.repository.action.EtatActionRepository;
 import com.crm.operis_app.repository.action.PlanActionRepository;
@@ -60,7 +66,12 @@ public class PersonnelServiceImp implements PersonnelService {
     ClotureReclamationRepository  clotureReclamationRepository;
     @Autowired
     CreationReclamationRepository creationReclamationRepository;
-
+    @Autowired
+    ClotureNonConformiteRepository  clotureNonConformiteRepository;
+    @Autowired
+    ValidationNonConformiteRepository validationNonConformiteRepository;
+    @Autowired
+    ListeNonConformiteRepository listeNonConformiteRepository;
     Long formationId;
     Long personnelId;
     Long auditId;
@@ -331,6 +342,55 @@ public void addPersonalPlanAction(Long planId, Long personnelId) {
         etatAction.setPersonal(personnel);
         creationReclamationRepository.save(etatAction);
     }
+    @Override
+    public void addPersonalValidationNonConformite(Long validationId, Long personnelId) {
+        Optional<Personal> personnelById = personnelRepository.findById(personnelId);
+        if (!personnelById.isPresent()) {
+            throw new ResourceNotFoundException("Personnel with id " + personnelId + " does not exist");
+        }
+        Personal personnel = personnelById.get();
+        Optional<ValidationNonConformite> planById = validationNonConformiteRepository.findById(validationId);
+        if (!planById.isPresent()) {
+            throw new ResourceNotFoundException("plan with id " + validationId + " does not exist");
+        }
+        ValidationNonConformite planAction = planById.get();
+        planAction.setPersonal(personnel);
+        validationNonConformiteRepository.save(planAction);
+    }
+    @Override
+    public void addPersonalClotureNonConformite(Long clotureId, Long personnelId) {
+        Optional<Personal> personnelById = personnelRepository.findById(personnelId);
+        if (!personnelById.isPresent()) {
+            throw new ResourceNotFoundException("Personnel with id " + personnelId + " does not exist");
+        }
+        Personal personnel = personnelById.get();
+        Optional<ClotureNonConformite> planById = clotureNonConformiteRepository.findById(clotureId);
+        if (!planById.isPresent()) {
+            throw new ResourceNotFoundException("cloture with id " + clotureId + " does not exist");
+        }
+        ClotureNonConformite planAction = planById.get();
+        planAction.setPersonal(personnel);
+        clotureNonConformiteRepository.save(planAction);
+    }
+
+    @Override
+    public void addResponsableDecouverteListeNonConformite(Long listeNonConformiteId, Long personnelId) {
+        Optional<Personal> personnelById = personnelRepository.findById(personnelId);
+        if (!personnelById.isPresent()) {
+            throw new ResourceNotFoundException("Personnel with id " + personnelId + " does not exist");
+        }
+        Personal personnel = personnelById.get();
+        Optional<ListeNonConformite> nonConformiteById = listeNonConformiteRepository.findById(listeNonConformiteId);
+        if (!nonConformiteById.isPresent()) {
+            throw new ResourceNotFoundException("listeNonConformite with id " + listeNonConformiteId + " does not exist");
+        }
+        ListeNonConformite listeNonConformite = nonConformiteById.get();
+        listeNonConformite.setResponsableDecouverte(personnel);
+        listeNonConformiteRepository.save(listeNonConformite);
+    }
+
+
+
 
     @Override
 

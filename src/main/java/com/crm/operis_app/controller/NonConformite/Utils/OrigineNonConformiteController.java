@@ -1,6 +1,5 @@
 package com.crm.operis_app.controller.NonConformite.Utils;
 
-import com.crm.operis_app.model.NonConformite.Utils.CategorieNonConformite;
 import com.crm.operis_app.model.NonConformite.Utils.OrigineNonConformite;
 import com.crm.operis_app.services.NonConformite.Utils.OrigineNonConformiteService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,4 +48,17 @@ public class OrigineNonConformiteController {
     public ResponseEntity<Object> deleteOrigineNonConformiteById(@PathVariable(value = "origineId") Long origineId , @PathVariable(value = "isDelete") Boolean isDelete) {
         return origineNonConformiteService.deleteOrigineNonConformiteById(origineId,isDelete);
     }
+
+    //-------------------------------------addOrigineToNonConformite------------------//
+
+    @PostMapping(value = "/nonConformite/{nonConformiteId}/origine/{origineId}")
+    public void addOrigineToNonConformite(@PathVariable(value = "nonConformiteId") Long actionId, @PathVariable(value = "origineId") Long siteId) {
+        origineNonConformiteService.addOrigineToNonConformite(actionId,siteId);
+    }
+
+    @PostMapping(value = "/nonConformites/{nonConformiteId}/origine/{origineId}")
+    public void removeOrigineFromNonConformite(@PathVariable(value = "nonConformiteId") Long actionId, @PathVariable(value = "origineId") Long siteId) {
+        origineNonConformiteService.removeOrigineFromNonConformite(actionId,siteId);
+    }
+
 }
