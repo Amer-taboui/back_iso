@@ -17,11 +17,14 @@ public class ClotureNonConformite {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "CLOTURE_NON_CONFORMITE_ID")
     private Long id;
+
     @Column(name = "ETAT_NON_CONFORMITE_CLOTURE")
     private Boolean etatNonConformite = false;
+
     @JsonFormat(pattern="yyyy-MM-dd")
     @Column(name = "DATE_CLOTURE")
     private Date dateCloture;
+
     @Column(name = "COMMENTAIRE_CLOTURE")
     private String commentaire;
 

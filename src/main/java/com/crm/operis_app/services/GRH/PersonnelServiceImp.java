@@ -13,6 +13,8 @@ import com.crm.operis_app.model.action.actionCorrection.ValidationAction;
 import com.crm.operis_app.model.audit.ListeAudit;
 import com.crm.operis_app.model.authUser.User;
 
+import com.crm.operis_app.model.conformite.AnalyseConformite;
+import com.crm.operis_app.model.conformite.ListeConformite;
 import com.crm.operis_app.model.reclamation.AnalyseReclamation;
 import com.crm.operis_app.model.reclamation.ClotureReclamation;
 import com.crm.operis_app.model.reclamation.CreationReclamation;
@@ -27,6 +29,8 @@ import com.crm.operis_app.repository.action.PlanActionRepository;
 import com.crm.operis_app.repository.action.ValidationActionRepository;
 import com.crm.operis_app.repository.audit.ListeAuditRepository;
 import com.crm.operis_app.repository.authUser.UserRepository;
+import com.crm.operis_app.repository.conformite.AnalyseConformiteRepository;
+import com.crm.operis_app.repository.conformite.ListeConformiteRepository;
 import com.crm.operis_app.repository.reclamation.AnalyseReclamationRepository;
 import com.crm.operis_app.repository.reclamation.ClotureReclamationRepository;
 import com.crm.operis_app.repository.reclamation.CreationReclamationRepository;
@@ -72,6 +76,10 @@ public class PersonnelServiceImp implements PersonnelService {
     ValidationNonConformiteRepository validationNonConformiteRepository;
     @Autowired
     ListeNonConformiteRepository listeNonConformiteRepository;
+    @Autowired
+    ListeConformiteRepository listeConformiteRepository;
+    @Autowired
+    AnalyseConformiteRepository  analyseConformiteRepository;
     Long formationId;
     Long personnelId;
     Long auditId;
@@ -389,8 +397,37 @@ public void addPersonalPlanAction(Long planId, Long personnelId) {
         listeNonConformiteRepository.save(listeNonConformite);
     }
 
+    @Override
+    public void addResponsableVeilleListeConformite(Long listeConformiteId, Long personnelId) {
+        Optional<Personal> personnelById = personnelRepository.findById(personnelId);
+        if (!personnelById.isPresent()) {
+            throw new ResourceNotFoundException("Personnel with id " + personnelId + " does not exist");
+        }
+        Personal personnel = personnelById.get();
+        Optional<ListeConformite> conformiteById = listeConformiteRepository.findById(listeConformiteId);
+        if (!conformiteById.isPresent()) {
+            throw new ResourceNotFoundException("listeConformite with id " + listeConformiteId + " does not exist");
+        }
+        ListeConformite listeConformite = conformiteById.get();
+        listeConformite.setResponsableVeille(personnel);
+        listeConformiteRepository.save(listeConformite);
+    }
 
-
+    @Override
+    public void addPersonalAnalyseConformite(Long analyseConformiteId, Long personnelId) {
+        Optional<Personal> personnelById = personnelRepository.findById(personnelId);
+        if (!personnelById.isPresent()) {
+            throw new ResourceNotFoundException("Personnel with id " + personnelId + " does not exist");
+        }
+        Personal personnel = personnelById.get();
+        Optional<AnalyseConformite> planById = analyseConformiteRepository.findById(analyseConformiteId);
+        if (!planById.isPresent()) {
+            throw new ResourceNotFoundException("AnalyseConformite with id " + analyseConformiteId + " does not exist");
+        }
+        AnalyseConformite planAction = planById.get();
+        planAction.setPersonal(personnel);
+        analyseConformiteRepository.save(planAction);
+    }
 
     @Override
 

@@ -157,6 +157,18 @@ public void addPersonalToFormation(@PathVariable Long formationId, @PathVariable
         personnelServiceImp.addResponsableDecouverteListeNonConformite(listeNonConformiteId,personnelId);
     }
 
+    //--------------------------------addResponsableVeilleListeNonConformite------------------------//
+    @PostMapping(value = "/listeConformite/{listeConformiteId}/addResponsableVeille/{personnelId}")
+    public void  addResponsableVeilleListeConformite(@PathVariable(value = "listeConformiteId") Long listeConformiteId, @PathVariable(value = "personnelId") Long personnelId) {
+        personnelServiceImp.addResponsableVeilleListeConformite(listeConformiteId,personnelId);
+    }
+
+    //--------------------------------analyseConformite------------------------//
+    @PostMapping(value = "/analyseConformite/{analyseConformiteId}/addPersonnel/{personnelId}")
+    public void  addPersonalAnalyseConformite(@PathVariable(value = "analyseConformiteId") Long planId, @PathVariable(value = "personnelId") Long personnelId) {
+        personnelServiceImp.addPersonalAnalyseConformite(planId,personnelId);
+    }
+
     @GetMapping("/skill")
     public List<Map<String,Object>> getPersonalsWithSkills() {
         return personnelServiceImp.getPersonals();

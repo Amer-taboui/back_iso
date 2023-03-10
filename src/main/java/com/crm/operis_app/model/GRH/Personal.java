@@ -7,6 +7,8 @@ import com.crm.operis_app.model.action.actionCorrection.EtatAction;
 import com.crm.operis_app.model.action.actionCorrection.PlanAction;
 import com.crm.operis_app.model.action.actionCorrection.ValidationAction;
 import com.crm.operis_app.model.authUser.User;
+import com.crm.operis_app.model.conformite.AnalyseConformite;
+import com.crm.operis_app.model.conformite.ListeConformite;
 import com.crm.operis_app.model.files.FileModel;
 import com.crm.operis_app.model.reclamation.AnalyseReclamation;
 import com.crm.operis_app.model.reclamation.ClotureReclamation;
@@ -160,6 +162,18 @@ public class Personal implements Serializable {
     @OneToMany(mappedBy = "responsableDecouverte",fetch = FetchType.LAZY)
     @JsonIgnore
     private Set<ListeNonConformite>  responsableDecouverte  ;
+
+    //--------------ListeConformite---------------//
+
+    @OneToMany(mappedBy = "responsableVeille",fetch = FetchType.LAZY)
+    @JsonIgnore
+    private Set<ListeConformite>  responsableVeille  ;
+
+//--------------analyseConformite---------------//
+
+    @OneToMany(mappedBy = "personal",fetch = FetchType.LAZY)
+    @JsonIgnore
+    private Set<AnalyseConformite> analyseConformite  ;
 
 
     public Long getId() {
@@ -409,6 +423,22 @@ public class Personal implements Serializable {
 
     public void setResponsableDecouverte(Set<ListeNonConformite> responsableDecouverte) {
         this.responsableDecouverte = responsableDecouverte;
+    }
+
+    public Set<ListeConformite> getResponsableVeille() {
+        return responsableVeille;
+    }
+
+    public void setResponsableVeille(Set<ListeConformite> responsableVeille) {
+        this.responsableVeille = responsableVeille;
+    }
+
+    public Set<AnalyseConformite> getAnalyseConformite() {
+        return analyseConformite;
+    }
+
+    public void setAnalyseConformite(Set<AnalyseConformite> analyseConformite) {
+        this.analyseConformite = analyseConformite;
     }
 }
 

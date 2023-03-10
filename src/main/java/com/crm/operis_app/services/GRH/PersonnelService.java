@@ -31,7 +31,8 @@ public interface PersonnelService {
     void addPersonalCreationReclamation(Long crationId, Long personnelId);
     void addPersonalValidationNonConformite(Long validationId, Long personnelId);
     void addPersonalClotureNonConformite(Long clotureId, Long personnelId);
-
+    void addPersonalAnalyseConformite(Long analyseConformiteId, Long personnelId);
     void addResponsableDecouverteListeNonConformite(Long listeNonConformiteId, Long personnelId);
+    void addResponsableVeilleListeConformite(Long listeConformiteId, Long personnelId);
 
 }

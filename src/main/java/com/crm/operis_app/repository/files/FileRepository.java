@@ -18,6 +18,7 @@ public interface FileRepository extends JpaRepository<FileModel, Long> {
     List<FileModel> findByPostId(Long id);
     List<FileModel> findByListeActionCorrectionId(Long id);
     List<FileModel> findByListeNonConformiteId(Long id);
+    List<FileModel> findByListeConformiteId(Long id);
 
 }
 
