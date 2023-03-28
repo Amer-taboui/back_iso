@@ -32,6 +32,10 @@ public class ConstatAudit {
         private String libelle;
         @Column(name = "RISQUE")
         private String risque;
+        @Column(name = "SITE")
+        private String site;
+        @Column(name = "PROCESSUS")
+        private String processus;
         @Column(name="ETAT_CONSTAT")
         private boolean etatConstat = false;
         @JsonFormat(pattern="yyyy-MM-dd")
@@ -137,13 +141,27 @@ public class ConstatAudit {
                 this.responsableCloture = responsableCloture;
         }
         @JsonIgnore
-
         public ListeAudit getListeAudit() {
                 return listeAudit;
         }
         @JsonIgnore
-
         public void setListeAudit(ListeAudit listeAudit) {
                 this.listeAudit = listeAudit;
+        }
+
+        public String getSite() {
+                return site;
+        }
+
+        public void setSite(String site) {
+                this.site = site;
+        }
+
+        public String getProcessus() {
+                return processus;
+        }
+
+        public void setProcessus(String processus) {
+                this.processus = processus;
         }
 }

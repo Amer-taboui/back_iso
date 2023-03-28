@@ -5,6 +5,7 @@ import com.crm.operis_app.model.GRH.Formation;
 import com.crm.operis_app.model.GRH.Post;
 import com.crm.operis_app.model.NonConformite.ListeNonConformite;
 import com.crm.operis_app.model.action.actionCorrection.ListeActionCorrection;
+import com.crm.operis_app.model.audit.ListeAudit;
 import com.crm.operis_app.model.conformite.ListeConformite;
 import com.crm.operis_app.model.reclamation.ListeReclamation;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -62,6 +63,9 @@ public class FileModel {
     @JsonIgnore
     private Set<ListeConformite> listeConformite;
 
+    @ManyToMany(fetch = FetchType.LAZY,	cascade = CascadeType.ALL,mappedBy = "fileModels")
+    @JsonIgnore
+    private Set<ListeAudit> listeAudit;
 
     public FileModel(String name, String mimetype, byte[] pic) {
         this.name = name;
@@ -148,5 +152,13 @@ public class FileModel {
 
     public void setListeConformite(Set<ListeConformite> listeConformite) {
         this.listeConformite = listeConformite;
+    }
+
+    public Set<ListeAudit> getListeAudit() {
+        return listeAudit;
+    }
+
+    public void setListeAudit(Set<ListeAudit> listeAudit) {
+        this.listeAudit = listeAudit;
     }
 }

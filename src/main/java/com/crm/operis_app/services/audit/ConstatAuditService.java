@@ -17,10 +17,10 @@ public class ConstatAuditService {
 
 
     @Autowired
-    ListeAuditRepository listeAuditRepository;
+    private ListeAuditRepository listeAuditRepository;
 
     @Autowired
-    ConstatAuditRepository constatAuditRepository;
+    private ConstatAuditRepository constatAuditRepository;
 
 
 
@@ -72,7 +72,8 @@ public class ConstatAuditService {
         liste1.setRisque(validationAction.getRisque());
         liste1.setNorme(validationAction.getNorme());
         liste1.setDateClotureConstat(validationAction.getDateClotureConstat());
-
+        liste1.setSite(validationAction.getSite());
+        liste1.setProcessus(validationAction.getProcessus());
         return  constatAuditRepository.save(liste1);
     }
 

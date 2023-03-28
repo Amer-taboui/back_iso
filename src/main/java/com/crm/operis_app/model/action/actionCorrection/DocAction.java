@@ -12,7 +12,7 @@ public class DocAction {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "DOC_ACTION_ID")
-    private Long id;
+     Long id;
 
     @Column(name = "NOM_DOCUMENT")
     private String nomDocument;

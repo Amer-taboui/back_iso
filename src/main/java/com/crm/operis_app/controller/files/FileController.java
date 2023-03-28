@@ -186,6 +186,24 @@ public class FileController {
     public void removeFileFromAction(@PathVariable(value = "actionId") Long actionId, @PathVariable(value = "fileId") Long fileId) {
         fileService.removeFileFromAction(actionId,fileId);
     }
+    /** ADD /REMOVE Files By AUDIT */
+
+    @JsonView(View.FileInfo.class)
+    @GetMapping("/audit/{id}/files")
+    public List<FileModel> getListFilesByAudit(@PathVariable(value = "id") Long id) {
+        return fileRepository.findByListeAuditId(id);
+    }
+
+
+    @PostMapping(value = "/audit/{auditId}/addFile/{fileId}")
+    public void addFileToAudit(@PathVariable(value = "auditId") Long actionId, @PathVariable(value = "fileId") Long fileId) {
+        fileService.addFileToAudit(actionId,fileId);
+    }
+
+    @PostMapping(value = "/audit/{auditId}/removeFile/{fileId}")
+    public void removeFileFromAudit(@PathVariable(value = "auditId") Long auditId, @PathVariable(value = "fileId") Long fileId) {
+        fileService.removeFileFromAudit(auditId,fileId);
+    }
 //-------------------------------------------------------------------------//
     @RequestMapping("/file/PlanComptable")
     public void downloadPDFResource(HttpServletRequest request, HttpServletResponse response) throws IOException {

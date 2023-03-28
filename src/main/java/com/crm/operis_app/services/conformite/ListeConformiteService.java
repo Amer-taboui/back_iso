@@ -50,9 +50,7 @@ public class ListeConformiteService {
         listeReclamation.setConformite(ReclamationRequest.getConformite());
         listeReclamation.setAnalyseConformite(ReclamationRequest.getAnalyseConformite());
         listeReclamation.setApplicabilite(ReclamationRequest.getApplicabilite());
-        listeReclamation.setDomaine(ReclamationRequest.getDomaine());
-        listeReclamation.setNatureExigence(ReclamationRequest.getNatureExigence());
-        listeReclamation.setSousDomaine(ReclamationRequest.getSousDomaine());
+
         listeReclamation.setSyntheseExigence(ReclamationRequest.getSyntheseExigence());
         listeReclamation.setSysteme(ReclamationRequest.getSysteme());
 

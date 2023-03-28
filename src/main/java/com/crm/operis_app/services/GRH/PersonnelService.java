@@ -34,5 +34,4 @@ public interface PersonnelService {
     void addPersonalAnalyseConformite(Long analyseConformiteId, Long personnelId);
     void addResponsableDecouverteListeNonConformite(Long listeNonConformiteId, Long personnelId);
     void addResponsableVeilleListeConformite(Long listeConformiteId, Long personnelId);
-
 }

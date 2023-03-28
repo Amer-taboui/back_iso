@@ -51,7 +51,6 @@ public class ValidationNonConformite {
     public String getTraitement() {
         return traitement;
     }
-
     public void setTraitement(String traitement) {
         this.traitement = traitement;
     }

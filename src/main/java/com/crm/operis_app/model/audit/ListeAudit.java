@@ -1,12 +1,10 @@
 package com.crm.operis_app.model.audit;
 
 import com.crm.operis_app.model.GRH.Personal;
-import com.crm.operis_app.model.action.actionCorrection.ValidationAction;
 import com.crm.operis_app.model.files.FileModel;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
-
 import javax.persistence.*;
 import java.util.Date;
 import java.util.Set;
@@ -68,7 +66,14 @@ public class ListeAudit {
     @JoinTable(name = "Audit_FILE", joinColumns = { @JoinColumn(name = "LIST_AUDIT_ID") }, inverseJoinColumns = {
             @JoinColumn(name = "FILE_ID") })
     private Set<FileModel> fileModels;
-
+    //------------------------Audite------------------------------//
+    @OrderBy("id ASC")
+    @OneToMany(mappedBy = "listeAudit", cascade = CascadeType.ALL, fetch = FetchType.LAZY )
+    private Set<Audite> audite;
+    //------------------------Constat-Audit------------------------------//
+    @OrderBy("id ASC")
+    @OneToMany(mappedBy = "listeAudit", cascade = CascadeType.ALL, fetch = FetchType.LAZY )
+    private Set<Auditeur> auditeur;
 
 
 }

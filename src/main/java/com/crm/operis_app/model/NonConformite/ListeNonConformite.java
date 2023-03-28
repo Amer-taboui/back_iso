@@ -53,11 +53,11 @@ public class ListeNonConformite {
     @Column(name = "ACTIVE")
     private Boolean active = true;
 
+
     @OrderBy("id ASC")
     @ManyToOne
     @JoinColumn(name = "RESPONSABLE_DECOUVERTE_ID")
     private Personal responsableDecouverte;
-
 
     //---------------------------Categorie----------------------------//
     @ManyToMany

@@ -30,6 +30,7 @@ import java.util.Set;
 @NoArgsConstructor
 @Table(name = "PERSONNEL")
 public class Personal implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "PERSONNEL_ID")

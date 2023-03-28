@@ -1,6 +1,7 @@
 package com.crm.operis_app.controller.Utils;
 
 import com.crm.operis_app.model.GRH.Personal;
+import com.crm.operis_app.repository.Utils.PersonnelRepository;
 import com.crm.operis_app.services.GRH.PersonnelService;
 import com.crm.operis_app.services.GRH.PersonnelServiceImp;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.awt.print.Pageable;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -18,6 +20,8 @@ import java.util.Optional;
 public class PersonnelController {
     @Autowired
     PersonnelService personnelServiceImp;
+    @Autowired
+    PersonnelRepository personnelRepository;
 
     @RequestMapping(value = "/personnels", method = RequestMethod.GET)
     public List<Personal> getAllPersonnel() {
@@ -169,10 +173,14 @@ public void addPersonalToFormation(@PathVariable Long formationId, @PathVariable
         personnelServiceImp.addPersonalAnalyseConformite(planId,personnelId);
     }
 
+//-----------------------------------search----------------------------------//
+
+
     @GetMapping("/skill")
     public List<Map<String,Object>> getPersonalsWithSkills() {
         return personnelServiceImp.getPersonals();
     }
+
 
 
 

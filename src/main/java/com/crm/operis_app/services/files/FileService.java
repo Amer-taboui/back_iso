@@ -7,6 +7,7 @@ import com.crm.operis_app.model.GRH.Personal;
 import com.crm.operis_app.model.GRH.Post;
 import com.crm.operis_app.model.NonConformite.ListeNonConformite;
 import com.crm.operis_app.model.action.actionCorrection.ListeActionCorrection;
+import com.crm.operis_app.model.audit.ListeAudit;
 import com.crm.operis_app.model.conformite.ListeConformite;
 import com.crm.operis_app.model.files.FileModel;
 
@@ -16,6 +17,7 @@ import com.crm.operis_app.repository.GRH.PostRepository;
 import com.crm.operis_app.repository.NonConformite.ListeNonConformiteRepository;
 import com.crm.operis_app.repository.Utils.PersonnelRepository;
 import com.crm.operis_app.repository.action.ListeActionCorrectionRepository;
+import com.crm.operis_app.repository.audit.ListeAuditRepository;
 import com.crm.operis_app.repository.conformite.ListeConformiteRepository;
 import com.crm.operis_app.repository.files.FileRepository;
 
@@ -53,6 +55,9 @@ public class FileService {
 
     @Autowired
     ListeConformiteRepository listeConformiteRepository;
+
+    @Autowired
+    ListeAuditRepository listeAuditRepository;
 
     public ResponseEntity<Object> deleteFileById(Long id) {
         if (!fileRepository.existsById(id)) {
@@ -280,5 +285,37 @@ public class FileService {
         ListeActionCorrection post = actionById.get();
         post.getFileModels().remove(file);
         listeActionRepository.save(post);
+    }
+
+    /** ADD /REMOVE Files By AUDIT */
+
+    public void addFileToAudit(Long auditId, Long fileId) {
+        Optional<FileModel> fileById = fileRepository.findById(fileId);
+        if (!fileById.isPresent()) {
+            throw new ResourceNotFoundException("file with id " + fileId + " does not exist");
+        }
+        FileModel file = fileById.get();
+        Optional<ListeAudit> auditById = listeAuditRepository.findById(auditId);
+        if (!auditById.isPresent()) {
+            throw new ResourceNotFoundException("auditId with id " + auditId + " does not exist");
+        }
+        ListeAudit post = auditById.get();
+        post.getFileModels().add(file);
+        listeAuditRepository.save(post);
+    }
+
+    public void removeFileFromAudit(Long auditId, Long fileId) {
+        Optional<FileModel> fileById = fileRepository.findById(fileId);
+        if (!fileById.isPresent()) {
+            throw new ResourceNotFoundException("file with id " + fileId + " does not exist");
+        }
+        FileModel file = fileById.get();
+        Optional<ListeAudit>  auditById = listeAuditRepository.findById(auditId);
+        if (!auditById.isPresent()) {
+            throw new ResourceNotFoundException("auditId with id " + auditId + " does not exist");
+        }
+        ListeAudit post = auditById.get();
+        post.getFileModels().remove(file);
+        listeAuditRepository.save(post);
     }
 }

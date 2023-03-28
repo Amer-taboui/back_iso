@@ -59,6 +59,9 @@ public class Formation {
     @Column(name = "REFUND")
     private String refund ;
 
+    @Column(name = "FORMER")
+    private String former;
+
     @Column(name = "VALIDATOR")
     private String validator ;
 
@@ -348,5 +351,13 @@ private Set<Post> post;
 
     public void setPlannedEndDate(Date plannedEndDate) {
         this.plannedEndDate = plannedEndDate;
+    }
+
+    public String getFormer() {
+        return former;
+    }
+
+    public void setFormer(String former) {
+        this.former = former;
     }
 }

@@ -23,8 +23,6 @@ public class PlanAction {
     private int tauxEfficacite;
     @Column(name="COMMENTAIRE_SUIVI")
     private String commentaireSuivi;
-
-
     @OrderBy("id ASC")
     @ManyToOne
     @JoinColumn(name = "PERSONNEL_ID")

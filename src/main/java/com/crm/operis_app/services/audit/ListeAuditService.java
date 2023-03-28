@@ -51,6 +51,7 @@ public class ListeAuditService {
         liste1.setDateDebutReelle(listeRequest.getDateDebutReelle());
         liste1.setDateFinRelle(listeRequest.getDateFinRelle());
         liste1.setCommentaire(listeRequest.getCommentaire());
+        liste1.setEtatAudit(listeRequest.getEtatAudit());
 
         return listeAuditRepository.save(liste1);
     }

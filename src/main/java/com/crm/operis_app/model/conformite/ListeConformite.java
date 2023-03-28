@@ -2,7 +2,9 @@ package com.crm.operis_app.model.conformite;
 
 import com.crm.operis_app.model.GRH.Personal;
 
-import com.crm.operis_app.model.NonConformite.ValidationNonConformite;
+
+import com.crm.operis_app.model.conformite.Utils.DomaineConformite;
+import com.crm.operis_app.model.conformite.Utils.NatureExigence;
 import com.crm.operis_app.model.files.FileModel;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -27,21 +29,12 @@ public class ListeConformite {
     private Long id;
 
 
-    @Column(name = "NATURE_EXIGENCE")
-    private String natureExigence;
-
     @JsonFormat(pattern="yyyy-MM-dd")
     @Column(name = "DATE_APPLICATION")
     private Date dateApplication;
 
     @Column(name = "SYSTEME")
     private String systeme;
-
-    @Column(name = "DOMAINE")
-    private String domaine;
-
-    @Column(name = "SOUS_DOMAINE")
-    private String sousDomaine;
 
     @Column(name = "APPLICABILITE")
     private String applicabilite;
@@ -68,6 +61,16 @@ public class ListeConformite {
 
 
 
+    //---------------------------DomaineConformite----------------------------//
+    @ManyToMany
+    @JoinTable(name = "CONFORMITE_DOMAINE", joinColumns = {@JoinColumn(name = "LISTE_CONFORMITE_ID")}, inverseJoinColumns = {
+            @JoinColumn(name = "DOMAINE_CONFORMITE_ID")})
+    private Set<DomaineConformite> domaineConformite;
+    //---------------------------NatureExigence----------------------------//
+    @ManyToMany
+    @JoinTable(name = "CONFORMITE_NATURE", joinColumns = {@JoinColumn(name = "LISTE_CONFORMITE_ID")}, inverseJoinColumns = {
+            @JoinColumn(name = "NATURE_EXIGENCE_ID")})
+    private Set<NatureExigence> natureExigences ;
 
     //-----------------ValidationNonConformite-------------------------//
     @OrderBy("id ASC")
@@ -89,15 +92,6 @@ public class ListeConformite {
         this.id = id;
     }
 
-    public String getNatureExigence() {
-        return natureExigence;
-    }
-
-    public void setNatureExigence(String natureExigence) {
-        this.natureExigence = natureExigence;
-    }
-
-
 
     public String getSysteme() {
         return systeme;
@@ -107,13 +101,7 @@ public class ListeConformite {
         this.systeme = systeme;
     }
 
-    public String getSousDomaine() {
-        return sousDomaine;
-    }
 
-    public void setSousDomaine(String sousDomaine) {
-        this.sousDomaine = sousDomaine;
-    }
 
     public String getApplicabilite() {
         return applicabilite;
@@ -195,11 +183,19 @@ public class ListeConformite {
         this.dateApplication = dateApplication;
     }
 
-    public String getDomaine() {
-        return domaine;
+    public Set<DomaineConformite> getDomaineConformite() {
+        return domaineConformite;
     }
 
-    public void setDomaine(String domaine) {
-        this.domaine = domaine;
+    public void setDomaineConformite(Set<DomaineConformite> domaineConformite) {
+        this.domaineConformite = domaineConformite;
+    }
+
+    public Set<NatureExigence> getNatureExigences() {
+        return natureExigences;
+    }
+
+    public void setNatureExigences(Set<NatureExigence> natureExigences) {
+        this.natureExigences = natureExigences;
     }
 }

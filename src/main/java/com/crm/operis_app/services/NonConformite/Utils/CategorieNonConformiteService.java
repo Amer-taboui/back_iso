@@ -98,11 +98,4 @@ public class CategorieNonConformiteService {
         listeNonConformiteRepository.save(action);
     }
 
-
-
-
-
-
-
-
 }

@@ -72,9 +72,9 @@ public class FormationServiceImp implements FormationService{
     formation1.setRealizationDate(FormationRequest.getRealizationDate());
     formation1.setRealizationStatus(FormationRequest.getRealizationStatus());
     formation1.setRefund(FormationRequest.getRefund());
+    formation1.setFormer(FormationRequest.getFormer());
     formation1.setValid(FormationRequest.getValid());
     formation1.setValidator(FormationRequest.getValidator());
-    formation1.setRefund(FormationRequest.getRefund());
     formation1.setEndRealizationDate(FormationRequest.getEndRealizationDate());
     formation1.setPlannedDate(FormationRequest.getPlannedDate());
     formation1.setPlannedEndDate(FormationRequest.getPlannedEndDate());
